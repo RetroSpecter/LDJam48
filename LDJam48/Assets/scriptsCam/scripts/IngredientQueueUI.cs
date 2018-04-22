@@ -12,7 +12,7 @@ public class IngredientQueueUI : MonoBehaviour {
     public GameObject foodObj;
     public GameObject centerImage;
 
-    void Start() {
+    void Awake() {
         foodUI = new List<FoodUI>();
         counter = GetComponentInChildren<Text>();
         images = GetComponentsInChildren<Image>();
@@ -40,7 +40,6 @@ public class IngredientQueueUI : MonoBehaviour {
 
     public void updateUI(List<Ingredient> inventory, IngredientsList ingredients) {
         counter.text = "" + inventory.Count;
-
         if (inventory.Count > 2) {
             //FoodUI newFood = Instantiate(foodObj, counter.transform.position, Quaternion.identity).GetComponent<FoodUI>();
             //newFood.transform.parent = transform.parent;

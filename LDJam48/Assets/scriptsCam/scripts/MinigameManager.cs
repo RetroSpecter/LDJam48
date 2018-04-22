@@ -20,47 +20,16 @@ public class MinigameManager : MonoBehaviour {
 
     public GameObject foodUI;
 
-    // Use this for initialization
-    void Start () {
+    public void StartMinigame() {
         ingredientInventory = FindObjectOfType<IngredientInv>();
         pots = GetComponentsInChildren<Pot>();
-
-        ingredientInventory.addIngredient("milk");
-        ingredientInventory.addIngredient("milk");
-        ingredientInventory.addIngredient("lettuce");
-        ingredientInventory.addIngredient("tomato");
-        ingredientInventory.addIngredient("milk");
-        ingredientInventory.addIngredient("lettuce");
-        ingredientInventory.addIngredient("tomato");
-        ingredientInventory.addIngredient("milk");
-        ingredientInventory.addIngredient("lettuce");
-        ingredientInventory.addIngredient("tomato");
-        ingredientInventory.addIngredient("milk");
-        ingredientInventory.addIngredient("milk");
-        ingredientInventory.addIngredient("lettuce");
-        ingredientInventory.addIngredient("tomato");
-        ingredientInventory.addIngredient("milk");
-        ingredientInventory.addIngredient("lettuce");
-        ingredientInventory.addIngredient("tomato");
-        ingredientInventory.addIngredient("milk");
-        ingredientInventory.addIngredient("lettuce");
-        ingredientInventory.addIngredient("tomato");
-        ingredientInventory.addIngredient("milk");
-        ingredientInventory.addIngredient("lettuce");
-        ingredientInventory.addIngredient("tomato");
-        ingredientInventory.addIngredient("milk");
-        ingredientInventory.addIngredient("milk");
-
         maxIngredientExpiration = ingredientExpiration;
-        StartMinigame();
-	}
-
-    void StartMinigame() {
+        curIngredientUI.gameObject.SetActive(true);
         transform.GetChild(0).gameObject.SetActive(true);
         transform.GetChild(1).gameObject.SetActive(false);
         if (!ingredientInventory.inventoryEmpty()) {
             updateCurrentIngredient();
-            ingredientQueueUI.setupUI(new List<Ingredient>(ingredientInventory.inventory), FindObjectOfType<IngredientsList>());
+            ingredientQueueUI.updateUI(new List<Ingredient>(ingredientInventory.inventory), FindObjectOfType<IngredientsList>());
         }
     }
 
@@ -84,7 +53,6 @@ public class MinigameManager : MonoBehaviour {
                     placeInPot(p);
                     ingredientExpiration = maxIngredientExpiration;
                     if (curIngredient == null) {
-                        //Invoke("endMinigame", 1.5f);
                         StartCoroutine("chooseTwo");
                     }
                     break;
@@ -96,6 +64,9 @@ public class MinigameManager : MonoBehaviour {
             Pot p = pots[Random.Range(0, pots.Length)];
             placeInPot(p);
             ingredientExpiration = maxIngredientExpiration;
+            if (curIngredient == null) {
+                StartCoroutine("chooseTwo");
+            }
             return;
         }
 	}
@@ -123,14 +94,16 @@ public class MinigameManager : MonoBehaviour {
         }
         Pot addedPot = selectedPots[0] + selectedPots[1];
         finalPot.updatePotStats(addedPot);
-        // then somehow send it over to player
-        //endMinigame();
+        yield return new WaitForSeconds(3);
+
+        endMinigame();
     }
 
     void endMinigame() {
         foreach (Pot p in pots) {
             p.clearPot();
         }
+        armController.toggle.Invoke(true);
         gameObject.SetActive(false);
     }
 

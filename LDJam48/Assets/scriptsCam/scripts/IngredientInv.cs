@@ -15,8 +15,13 @@ public class IngredientInv : MonoBehaviour {
 	}
 
     // assume ingredName is in list
-    public void addIngredient(string ingredName) {
-        inventory.Enqueue(ingredients.getIngredient(ingredName));
+    public bool addIngredient(string ingredName) {
+        if (!inventoryFull())
+        {
+            inventory.Enqueue(ingredients.getIngredient(ingredName));
+            return true;
+        }
+        return false;
     }
 
     public bool addIngredient(Ingredient ingred) {
@@ -29,16 +34,19 @@ public class IngredientInv : MonoBehaviour {
     }
 
     public bool inventoryEmpty() {
-        return inventory.Count == 0;
+        return inventoryPercentage() == 0;
+    }
+
+    public float inventoryPercentage() {
+        return inventory.Count / (float)maxSize;
     }
 
     public bool inventoryFull() {
-        return inventory.Count >= maxSize;
+        return inventoryPercentage() >= 1;
     }
 
     public Ingredient getFromInventory() {
         if (inventory.Count == 0) {
-            Debug.Log("list is empty");
             return null;
         }
         return inventory.Dequeue();

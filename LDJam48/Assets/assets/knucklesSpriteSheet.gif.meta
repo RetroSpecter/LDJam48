@@ -1,14 +1,17 @@
 fileFormatVersion: 2
-guid: 605a27ee8c99ab246ac8dc0ae1fc9bbb
-timeCreated: 1524331551
+guid: 6a086445c8d0b2c49b065f9d9cd86019
+timeCreated: 1524344724
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName:
-    21300000: StatUI_0
-    21300002: StatUI_1
-    21300004: StatUI_2
-    21300006: StatUI_3
-    21300008: StatUI_4
+    21300000: knucklesSpriteSheet_0
+    21300002: knucklesSpriteSheet_1
+    21300004: knucklesSpriteSheet_2
+    21300006: knucklesSpriteSheet_3
+    21300008: knucklesSpriteSheet_4
+    21300010: knucklesSpriteSheet_5
+    21300012: knucklesSpriteSheet_6
+    21300014: knucklesSpriteSheet_7
   externalObjects: {}
   serializedVersion: 4
   mipmaps:
@@ -50,8 +53,9 @@ TextureImporter:
   spriteMeshType: 1
   alignment: 0
   spritePivot: {x: 0.5, y: 0.5}
-  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
   spritePixelsToUnits: 100
+  spriteBorder: {x: 0, y: 0, z: 0, w: 0}
+  spriteGenerateFallbackPhysicsShape: 1
   alphaUsage: 1
   alphaIsTransparency: 1
   spriteTessellationDetail: -1
@@ -70,6 +74,7 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
+    androidETC2FallbackOverride: 0
   - buildTarget: Standalone
     maxTextureSize: 2048
     resizeAlgorithm: 0
@@ -79,53 +84,102 @@ TextureImporter:
     crunchedCompression: 0
     allowsAlphaSplitting: 0
     overridden: 0
-  - buildTarget: iPhone
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-  - buildTarget: Android
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-  - buildTarget: Windows Store Apps
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
-  - buildTarget: WebGL
-    maxTextureSize: 2048
-    resizeAlgorithm: 0
-    textureFormat: -1
-    textureCompression: 1
-    compressionQuality: 50
-    crunchedCompression: 0
-    allowsAlphaSplitting: 0
-    overridden: 0
+    androidETC2FallbackOverride: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: StatUI_0
+      name: knucklesSpriteSheet_0
       rect:
         serializedVersion: 2
-        x: 1
-        y: 33
+        x: 8
+        y: 95
+        width: 33
+        height: 54
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: knucklesSpriteSheet_1
+      rect:
+        serializedVersion: 2
+        x: 41
+        y: 98
         width: 30
-        height: 30
+        height: 50
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: knucklesSpriteSheet_2
+      rect:
+        serializedVersion: 2
+        x: 71
+        y: 99
+        width: 29
+        height: 48
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: knucklesSpriteSheet_3
+      rect:
+        serializedVersion: 2
+        x: 100
+        y: 99
+        width: 28
+        height: 47
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: knucklesSpriteSheet_4
+      rect:
+        serializedVersion: 2
+        x: 131
+        y: 99
+        width: 31
+        height: 50
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: knucklesSpriteSheet_5
+      rect:
+        serializedVersion: 2
+        x: 162
+        y: 99
+        width: 52
+        height: 50
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+    - serializedVersion: 2
+      name: knucklesSpriteSheet_6
+      rect:
+        serializedVersion: 2
+        x: 136
+        y: 7
+        width: 39
+        height: 42
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
@@ -133,55 +187,13 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
     - serializedVersion: 2
-      name: StatUI_1
+      name: knucklesSpriteSheet_7
       rect:
         serializedVersion: 2
-        x: 34
-        y: 32
-        width: 30
-        height: 31
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: StatUI_2
-      rect:
-        serializedVersion: 2
-        x: 69
-        y: 32
-        width: 27
-        height: 30
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: StatUI_3
-      rect:
-        serializedVersion: 2
-        x: 0
-        y: 0
-        width: 32
-        height: 32
-      alignment: 0
-      pivot: {x: 0, y: 0}
-      border: {x: 0, y: 0, z: 0, w: 0}
-      outline: []
-      physicsShape: []
-      tessellationDetail: 0
-    - serializedVersion: 2
-      name: StatUI_4
-      rect:
-        serializedVersion: 2
-        x: 34
-        y: 1
-        width: 27
-        height: 29
+        x: 92
+        y: 6
+        width: 42
+        height: 44
       alignment: 0
       pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
