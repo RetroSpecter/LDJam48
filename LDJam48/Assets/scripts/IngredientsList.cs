@@ -20,6 +20,7 @@ public class IngredientsList : MonoBehaviour {
     }
 
     public Ingredient getIngredient(string name) {
+        name = name.ToLower();
         if (!ingredientDict.ContainsKey(name)) {
             Debug.LogError("ingredient doesn't exist: " + name);
             return null;
