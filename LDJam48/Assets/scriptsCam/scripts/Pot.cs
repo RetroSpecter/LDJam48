@@ -139,11 +139,11 @@ public class Pot : MonoBehaviour {
 
     public static Pot operator +(Pot p1, Pot p2) {
         Pot res = new Pot();
-        res.attack = p1.attack + p2.attack;
-        res.defense = p1.defense + p2.defense;
-        res.healthRegen = p1.healthRegen + p2.healthRegen;
-        res.luck = p1.luck + p2.luck;
-        res.speed = p1.speed + p2.speed;
+        res.attack = Mathf.Round(p1.attack + p2.attack);
+        res.defense = Mathf.Round(p1.defense + p2.defense);
+        res.healthRegen = Mathf.Round(p1.healthRegen + p2.healthRegen);
+        res.luck = Mathf.Round(p1.luck + p2.luck);
+        res.speed = Mathf.Round(p1.speed + p2.speed);
         res.multiplyer = (p1.multiplyer + p2.multiplyer) / 2;
         return res;
     }

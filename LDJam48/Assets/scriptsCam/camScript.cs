@@ -31,7 +31,7 @@ public class camScript : MonoBehaviour {
         public float visionRange;
         public float attackRange;
         public logicType logic;
-        public Animator anim;
+        public RuntimeAnimatorController anim;
         public string walkAnimation;
         public string damageAnimation;
         public string deathAnimation;

@@ -95,7 +95,7 @@ public class MinigameManager : MonoBehaviour {
         Pot addedPot = selectedPots[0] + selectedPots[1];
         finalPot.updatePotStats(addedPot);
         yield return new WaitForSeconds(3);
-
+        FindObjectOfType<armController>().gorge(addedPot);
         endMinigame();
     }
 
