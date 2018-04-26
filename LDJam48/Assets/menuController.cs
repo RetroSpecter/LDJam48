@@ -4,9 +4,8 @@ using UnityEngine;
 
 public class menuController : MonoBehaviour {
 
-    public string levelName;
 
-    public void startGame() {
+    public void startGame(string levelName) {
         Application.LoadLevel(levelName);
     }
 
