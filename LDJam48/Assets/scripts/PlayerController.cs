@@ -3,8 +3,6 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour {
 
-
-
     public stats playerStats;
     public float fullHealth = 100;
     public float maxHealth;
@@ -14,10 +12,7 @@ public class PlayerController : MonoBehaviour {
     public float fireInterval;
     public GameObject cookingGame;
 
-    private IngredientInv inventory;
-
     public GameObject hitMarker;
-    public List<GameObject> roomPrefabs; //TODO: eventually move this out to it's own script
 
     public delegate void transition(bool on);
     public static transition toggle;
@@ -27,15 +22,18 @@ public class PlayerController : MonoBehaviour {
     private float knifeTimer;
     private Animator anime;
 
+    public PlayerStatUI playerStatUI;
+
     [Header("SoundFX")]
     public AudioClip shotgun;
 
 	// Use this for initialization
 	void Start () {
-        inventory = GetComponent<IngredientInv>();
         anime = GetComponentInChildren<Animator>();
         toggle += Activate;
         health = fullHealth;
+        playerStatUI.updateHealth(health, fullHealth);
+        playerStatUI.updateStats(playerStats);
     }
 
     void Update()
@@ -109,30 +107,24 @@ public class PlayerController : MonoBehaviour {
         }
     }
 
+    public void ApplyPotStats(stats potStats) {
+        playerStats = playerStats + potStats;
+        health += potStats.healthRegen;
+        health = Mathf.Min(health, maxHealth);
 
-    public void ApplyPotStats(Pot pot) {
-        health += pot.healthRegen * pot.multiplyer;
-        health = Mathf.Min(maxHealth, health);
-        playerStats.defense += pot.defense * pot.multiplyer;
-        playerStats.attack += pot.attack * pot.multiplyer;
-        playerStats.luck += pot.luck * pot.multiplyer;
-        playerStats.speed += pot.speed * pot.multiplyer;
-    }
-
-    public float GetHealthPercentage() { //TODO: completely rework UI system so that it is more modular
-        return (int)(health / (fullHealth) * 100f);
+        playerStatUI.updateHealth(health, fullHealth);
+        playerStatUI.updateStats(playerStats);
     }
 
     public void takeDamage(float damage) {
         health -= damage / Mathf.Sqrt(playerStats.defense);
         health = Mathf.Max(0, health);
-        
+        playerStatUI.updateHealth(health, fullHealth);
         if (health == 0) {
             FindObjectOfType<screenOverlayUI>().death();
             toggle.Invoke(false);
             toggle = null;
-        }
-        else {
+        } else {
             FindObjectOfType<screenOverlayUI>().flashHurt();
         }
     }
@@ -143,21 +135,7 @@ public class PlayerController : MonoBehaviour {
             FindObjectOfType<screenOverlayUI>().flashHeal();
         }
     }
-
-    private void OnTriggerStay(Collider other) {
-        if (other.tag == "ingredDrop") {
-            if (inventory.addIngredient(other.GetComponent<dropBehavior>().type))
-            {
-                Destroy(other.gameObject);
-            }
-            else
-            {
-                Debug.Log("inventory is full!!");
-            }
-        }
-    }
 }
-
 
 [System.Serializable]
 public struct stats
@@ -166,5 +144,35 @@ public struct stats
     public float defense;
     public float luck;
     public float speed;
-    public float healingFactor;
+    public float healthRegen;
+
+    public static stats operator +(stats s1, stats s2) {
+        stats res = new stats();
+        res.attack = Mathf.Round(s1.attack + s2.attack);
+        res.defense = Mathf.Round(s1.defense + s2.defense);
+        res.healthRegen = Mathf.Round(s1.healthRegen + s2.healthRegen);
+        res.luck = Mathf.Round(s1.luck + s2.luck);
+        res.speed = Mathf.Round(s1.speed + s2.speed);
+        return res;
+    }
+
+    public static stats operator *(stats s, float multiplier) {
+        stats res = s;
+        res.attack *= multiplier;
+        res.defense *= multiplier;
+        res.healthRegen *= multiplier;
+        res.luck *= multiplier;
+        res.speed *= multiplier;
+        return res;
+    }
+
+    public static stats operator *(float multiplier, stats s) {
+        stats res = s;
+        res.attack *= multiplier;
+        res.defense *= multiplier;
+        res.healthRegen *= multiplier;
+        res.luck *= multiplier;
+        res.speed *= multiplier;
+        return res;
+    }
 }

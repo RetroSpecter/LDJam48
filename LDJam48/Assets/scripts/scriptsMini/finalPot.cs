@@ -5,12 +5,6 @@ using UnityEngine.UI;
 
 public class finalPot : MonoBehaviour {
 
-    public float attack;
-    public float defense;
-    public float healthRegen;
-    public float luck;
-    public float speed;
-
     [Header("UI Elements")]
     public Text attackUI;
     public Text defenseUI;
@@ -29,7 +23,7 @@ public class finalPot : MonoBehaviour {
         MultiplyerText.gameObject.SetActive(false);
     }
 
-    public void updatePotStats(Pot p) {
+    public void updatePotStats(stats potStats, float multiplyer) {
         attackUI.gameObject.SetActive(true);
         defenseUI.gameObject.SetActive(true);
         healthUI.gameObject.SetActive(true);
@@ -37,11 +31,13 @@ public class finalPot : MonoBehaviour {
         speedUI.gameObject.SetActive(true);
         MultiplyerText.gameObject.SetActive(true);
 
-        attackUI.text = "" + p.attack + " x " + p.multiplyer + " = " + (p.attack * p.multiplyer);
-        defenseUI.text = "" + p.defense + " x " + p.multiplyer + " = " + (p.defense * p.multiplyer);
-        healthUI.text = "" + p.healthRegen + " x " + p.multiplyer + " = " + (p.healthRegen * p.multiplyer);
-        luckUI.text = "" + p.luck + " x " + p.multiplyer + " = " + (p.luck * p.multiplyer);
-        speedUI.text = "" + p.speed + " x " + p.multiplyer + " = " + (p.speed * p.multiplyer);
-        MultiplyerText.text = "x" + p.multiplyer;
+        stats p2 = potStats * multiplyer;
+        
+        attackUI.text = "" + potStats.attack + " x " + multiplyer + " = " + p2.attack;
+        defenseUI.text = "" + potStats.defense + " x " + multiplyer + " = " + p2.defense;
+        healthUI.text = "" + potStats.healthRegen + " x " + multiplyer + " = " + p2.healthRegen;
+        luckUI.text = "" + potStats.luck + " x " + multiplyer + " = " + p2.luck;
+        speedUI.text = "" + potStats.speed + " x " + multiplyer + " = " + p2.speed;
+        MultiplyerText.text = "x" + multiplyer;
     }
 }

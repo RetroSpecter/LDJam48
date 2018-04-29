@@ -15,10 +15,9 @@ public class MinigameManager : MonoBehaviour {
     public Slider expirationUI;
     public IngredientQueueUI ingredientQueueUI;
     [Space()]
-    public Pot[] pots;
-    public finalPot finalPot;
-
     public GameObject foodUI;
+    public finalPot finalPot;
+    public Pot[] pots;
 
     public void StartMinigame() {
         ingredientInventory = FindObjectOfType<IngredientInv>();
@@ -37,10 +36,8 @@ public class MinigameManager : MonoBehaviour {
         if (curIngredient == null) {
             return;
         }
-
         ingredientExpiration -= Time.deltaTime;
         expirationUI.value = ingredientExpiration / maxIngredientExpiration;
-
         foreach (Pot p in pots) {
             if (Input.GetKeyDown(p.key)) {
                 if (curIngredient != null) {
@@ -53,7 +50,6 @@ public class MinigameManager : MonoBehaviour {
                 }
             }
         }
-
         if (ingredientExpiration <= 0) {
             Pot p = pots[Random.Range(0, pots.Length)];
             placeInPot(p);
@@ -88,10 +84,11 @@ public class MinigameManager : MonoBehaviour {
         foreach (Pot p in selectedPots) {
             p.moveToPosition(p.transform.position - Vector3.up * 50, 1000, false);
         }
+
         Pot addedPot = selectedPots[0] + selectedPots[1];
-        finalPot.updatePotStats(addedPot);
+        finalPot.updatePotStats(addedPot.potStats, addedPot.multiplyer);
         yield return new WaitForSeconds(3);
-        FindObjectOfType<PlayerController>().ApplyPotStats(addedPot);
+        FindObjectOfType<PlayerController>().ApplyPotStats(addedPot.potStats * addedPot.multiplyer);
         endMinigame();
     }
 
@@ -117,7 +114,7 @@ public class MinigameManager : MonoBehaviour {
     void placeInPot(Pot p) {
         FoodUI food = Instantiate(foodUI, curIngredientUI.transform.position, transform.rotation).GetComponent<FoodUI>();
         food.setFood(curIngredient);
-        food.transform.parent = this.transform;
+        food.transform.SetParent(this.transform);
         food.transform.position = curIngredientUI.transform.position;
         food.transform.localScale = curIngredientUI.transform.localScale;
         food.disappearInTarget(p.gameObject);

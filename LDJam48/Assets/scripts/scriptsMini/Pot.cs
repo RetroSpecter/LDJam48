@@ -9,12 +9,7 @@ public class Pot : MonoBehaviour {
     public Dictionary<string, int> ingredientRate;
     private int IngredientCount;
 
-    public float attack;
-    public float defense;
-    public float healthRegen;
-    public float luck;
-    public float speed;
-
+    public stats potStats;
     public float multiplyer;
 
     [Header("UI Elements")]
@@ -31,7 +26,6 @@ public class Pot : MonoBehaviour {
     public float maxScale = 1.75f;
     public float incrementScale = 0.05f;
 
-    //private Image potVisual;
     private Animator anim;
 
     private void Start() {
@@ -44,12 +38,12 @@ public class Pot : MonoBehaviour {
 
     public void displayHighestStat() {
         Dictionary<string, float> statValues = new Dictionary<string, float>();
-        KeyValuePair<string, float> highestStat = new KeyValuePair<string, float>("attack", attack);
-        statValues.Add("attack", attack);
-        statValues.Add("defense", defense);
-        statValues.Add("healthRegen", healthRegen);
-        statValues.Add("luck", luck);
-        statValues.Add("speed", speed);
+        KeyValuePair<string, float> highestStat = new KeyValuePair<string, float>("attack", potStats.attack);
+        statValues.Add("attack", potStats.attack);
+        statValues.Add("defense", potStats.defense);
+        statValues.Add("healthRegen", potStats.healthRegen);
+        statValues.Add("luck", potStats.luck);
+        statValues.Add("speed", potStats.speed);
 
         foreach (KeyValuePair<string, float> key in statValues) {
             if (key.Value > highestStat.Value) {
@@ -91,11 +85,11 @@ public class Pot : MonoBehaviour {
         ingredientRate[ingr.name] += 1;
         IngredientCount++;
 
-        attack += ingr.attack;
-        defense += ingr.defense;
-        healthRegen += ingr.healthRegen;
-        luck += ingr.luck;
-        speed += ingr.speed;
+        potStats.attack += ingr.attack;
+        potStats.defense += ingr.defense;
+        potStats.healthRegen += ingr.healthRegen;
+        potStats.luck += ingr.luck;
+        potStats.speed += ingr.speed;
 
         updateMultiplyer();
         statVisual.gameObject.SetActive(IngredientCount >= 3);
@@ -110,12 +104,8 @@ public class Pot : MonoBehaviour {
     }
 
     public void clearPot() {
-        attack = 0;
-        defense = 0;
-        healthRegen = 0;
-        luck = 0;
-        speed = 0;
-        multiplyer = 0;
+        potStats = new stats();
+        multiplyer = 1;
 
         ingredientRate.Clear();
         IngredientCount = 0;
@@ -146,11 +136,7 @@ public class Pot : MonoBehaviour {
 
     public static Pot operator +(Pot p1, Pot p2) {
         Pot res = new Pot();
-        res.attack = Mathf.Round(p1.attack + p2.attack);
-        res.defense = Mathf.Round(p1.defense + p2.defense);
-        res.healthRegen = Mathf.Round(p1.healthRegen + p2.healthRegen);
-        res.luck = Mathf.Round(p1.luck + p2.luck);
-        res.speed = Mathf.Round(p1.speed + p2.speed);
+        res.potStats = p1.potStats + p2.potStats;
         res.multiplyer = (p1.multiplyer + p2.multiplyer) / 2;
         return res;
     }

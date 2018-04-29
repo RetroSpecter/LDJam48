@@ -97,7 +97,7 @@ public class mapController : MonoBehaviour
 
     private mapController getRoomType()
     {
-        List<GameObject> potentialRooms = GameObject.FindObjectOfType<PlayerController>().roomPrefabs;
+        List<GameObject> potentialRooms = ProceduralRoomManager.InstanceRoomPrefabs;
         return potentialRooms[Random.Range(0, potentialRooms.Count)].GetComponent<mapController>();
     }
 

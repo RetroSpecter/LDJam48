@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657898, g: 0.4964133, b: 0.5748178, a: 1}
+  m_IndirectSpecularColor: {r: 0.44657844, g: 0.49641222, b: 0.57481694, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
@@ -277,6 +277,260 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: a6b36baf94089b04288690344322d0ff, type: 2}
   m_IsPrefabParent: 0
+--- !u!1 &1610812376
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 1610812377}
+  - component: {fileID: 1610812379}
+  - component: {fileID: 1610812378}
+  m_Layer: 0
+  m_Name: Background Music
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &1610812377
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1610812376}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0.15172121, y: 0.38857514, z: -9.734819}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1813458443}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1610812378
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1610812376}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cfe19ecd6214a334d8751b6111a4192d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fightingMusic: {fileID: 8300000, guid: d479fb8004ef9e049b198eb3d5c9e68e, type: 3}
+  cookingMusic: {fileID: 8300000, guid: 4279beccdd9586f438d56f394e2564da, type: 3}
+--- !u!82 &1610812379
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1610812376}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: d479fb8004ef9e049b198eb3d5c9e68e, type: 3}
+  m_PlayOnAwake: 1
+  m_Volume: 0.091
+  m_Pitch: 1
+  Loop: 1
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 98
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    - serializedVersion: 2
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 2
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 0
+--- !u!1 &1813458439
+GameObject:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 5
+  m_Component:
+  - component: {fileID: 1813458443}
+  - component: {fileID: 1813458442}
+  - component: {fileID: 1813458441}
+  - component: {fileID: 1813458440}
+  m_Layer: 0
+  m_Name: GameManagers
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1813458440
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1813458439}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 75d779b9f71392b4c89bb032b569a27d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  roomPrefabs:
+  - {fileID: 1515650776141642, guid: 1c8930c12926fe849965b27f2c5468b5, type: 2}
+  - {fileID: 1408884220000080, guid: d5196458f917d8744b73a86038b4c46c, type: 2}
+  - {fileID: 1171733014569234, guid: c6663c1994b0e494b9a5f5e2c055c788, type: 2}
+--- !u!114 &1813458441
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1813458439}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cb6fac82eadd5e3418df2aefdd612035, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  player: {fileID: 0}
+  types:
+  - speed: 3
+    name: tomato
+    lockedYPos: 0
+    maxHealth: 100
+    visionRange: 100
+    attackRange: 1
+    logic: 0
+    anim: {fileID: 22100000, guid: bf57232e0fe004148be0b5f513d00455, type: 2}
+  - speed: 2
+    name: bread
+    lockedYPos: 0
+    maxHealth: 160
+    visionRange: 100
+    attackRange: 1
+    logic: 0
+    anim: {fileID: 9100000, guid: 75021b30b497cff4c928377eccd87abb, type: 2}
+  - speed: 3
+    name: lettuce
+    lockedYPos: 0
+    maxHealth: 100
+    visionRange: 100
+    attackRange: 1
+    logic: 0
+    anim: {fileID: 22100000, guid: bf57232e0fe004148be0b5f513d00455, type: 2}
+--- !u!114 &1813458442
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1813458439}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e7f60ff4418341843ad7deb242f7b9e5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ingredient:
+  - name: lettuce
+    attack: 0.25
+    defense: 0.25
+    healthRegen: 1
+    luck: 0.25
+    speed: 0.25
+    ingredintImage: {fileID: 21300006, guid: 837c3c9275ca59c4eb7a294ba537dad0, type: 3}
+  - name: tomato
+    attack: 0.25
+    defense: 1
+    healthRegen: 0.25
+    luck: 0.25
+    speed: 0.25
+    ingredintImage: {fileID: 21300000, guid: 837c3c9275ca59c4eb7a294ba537dad0, type: 3}
+  - name: bread
+    attack: 0
+    defense: 1
+    healthRegen: 0.25
+    luck: 0.25
+    speed: 0.25
+    ingredintImage: {fileID: 21300002, guid: 837c3c9275ca59c4eb7a294ba537dad0, type: 3}
+  - name: chicken
+    attack: 0
+    defense: 1
+    healthRegen: 0.25
+    luck: 1
+    speed: 0.5
+    ingredintImage: {fileID: 21300008, guid: 837c3c9275ca59c4eb7a294ba537dad0, type: 3}
+  - name: grape
+    attack: 0
+    defense: 1
+    healthRegen: 0.5
+    luck: 0.25
+    speed: 1
+    ingredintImage: {fileID: 21300004, guid: 837c3c9275ca59c4eb7a294ba537dad0, type: 3}
+--- !u!4 &1813458443
+Transform:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1813458439}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.45, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 1610812377}
+  m_Father: {fileID: 0}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1867324898
 GameObject:
   m_ObjectHideFlags: 0

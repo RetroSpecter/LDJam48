@@ -42,7 +42,7 @@ public class mobScript : MonoBehaviour {
         rb.constraints = RigidbodyConstraints.FreezePositionY | RigidbodyConstraints.FreezeRotation; //if we get nullpointers here, it is because the names are wrong
         health = type.maxHealth;
         PlayerController.toggle += activate;
-        Invoke("setBoxCollider", 0.01f);
+        Invoke("setBoxCollider", 0.1f);
     }
 
     void setBoxCollider() {
@@ -53,8 +53,7 @@ public class mobScript : MonoBehaviour {
         active = b;
     }
 
-    public void damage(float amount)
-    {
+    public void damage(float amount) {
         health -= amount;
         transform.position = Vector3.MoveTowards(transform.position, transform.position - (transform.forward * 10), 1f * Time.deltaTime * amount / 10);
         if(health < 0) {
@@ -94,13 +93,9 @@ public class mobScript : MonoBehaviour {
 	void Update () {
         rb.velocity = Vector3.zero;
 
-        if (player == null)
-        {
+        if (player == null) {
             player = GameObject.FindGameObjectWithTag("Player");
         }
-
-        transform.LookAt(player.transform, Vector3.up);
-        transform.rotation = Quaternion.Euler(0f, transform.rotation.eulerAngles.y, 0f);
 
         if (!active) {
             return;
@@ -120,7 +115,6 @@ public class mobScript : MonoBehaviour {
                     Invoke("toggleCanDamage", 10);
                 }
             }
-            //rb.MovePosition(r.GetPoint(Vector3.Distance(transform.position, player.transform.position) - 1f));
         }
         transform.position.Set(transform.position.x, type.lockedYPos, transform.position.z);
         
