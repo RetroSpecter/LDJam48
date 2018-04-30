@@ -20,13 +20,11 @@ public class roomSpawnScript : MonoBehaviour {
         difficulty = mapController.peers.Count - 1;
     }
 
-    private void populate()
-    {
-        for(int i = 0; i < difficulty; i++)
-        {
+    private void populate() {
+        for(int i = 0; i < difficulty; i++) {
             GameObject newMob = GameObject.Instantiate(mobFab, generateRandomPosition(5), new Quaternion(), transform);
-            mobManager.mobType mob = FindObjectOfType<mobManager>().types[Random.Range(0, FindObjectOfType<mobManager>().types.Count)];
-            newMob.GetComponent<mobScript>().birth(mob);
+            enemy mob = FindObjectOfType<mobManager>().types[Random.Range(0, FindObjectOfType<mobManager>().types.Length)];
+            newMob.GetComponent<mobScript>().Spawn(mob);
         }
     }
 

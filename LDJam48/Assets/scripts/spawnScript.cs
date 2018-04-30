@@ -63,9 +63,9 @@ public class spawnScript : MonoBehaviour {
         enemyCount++;
         GameObject o = GameObject.Instantiate(mobFab);
 
-        mobManager.mobType mob = FindObjectOfType<mobManager>().types[Random.Range(0, FindObjectOfType<mobManager>().types.Count)];
+        enemy mob = FindObjectOfType<mobManager>().types[Random.Range(0, FindObjectOfType<mobManager>().types.Length)];
 
-        o.GetComponent<mobScript>().birth(mob);
+        o.GetComponent<mobScript>().Spawn(mob);
         o.transform.position = transform.position;
     }
 }

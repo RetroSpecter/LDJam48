@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using TypeReferences;
 using UnityEngine;
 
 public class PlayerController : MonoBehaviour {
@@ -27,8 +28,8 @@ public class PlayerController : MonoBehaviour {
     [Header("SoundFX")]
     public AudioClip shotgun;
 
-	// Use this for initialization
-	void Start () {
+    // Use this for initialization
+    void Start () {
         anime = GetComponentInChildren<Animator>();
         toggle += Activate;
         health = fullHealth;
@@ -36,20 +37,18 @@ public class PlayerController : MonoBehaviour {
         playerStatUI.updateStats(playerStats);
     }
 
-    void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
+    void Update() {
+        if (Input.GetKeyDown(KeyCode.Escape)) {
             Application.Quit();
         }
 
         gunTimer -= Time.deltaTime;
+
         //gun
         if (Input.GetButtonDown("Fire1") && gunTimer < 0 && GetComponent<SpriteRenderer>().enabled)
         {
             gunTimer = fireInterval - (playerStats.speed / 300);
-            if (gunTimer < .2f)
-            {
+            if (gunTimer < .2f) {
                 gunTimer = .2f;
             }
             //fire the gun animation!
@@ -62,14 +61,13 @@ public class PlayerController : MonoBehaviour {
                 audioManager.instance.Play(shotgun, 0.15f);
                 if (lineOfFire.collider.gameObject.tag == "enemyy")
                 {
-                    lineOfFire.collider.gameObject.GetComponent<mobScript>().damage(playerStats.luck * 10);
+                    lineOfFire.collider.gameObject.GetComponent<mobScript>().TakeDamage(playerStats.luck * 10);
                 }
             }
         }
 
         //knife
-        if (Input.GetButtonDown("Fire2") && GetComponent<SpriteRenderer>().enabled)
-        {
+        if (Input.GetButtonDown("Fire2") && GetComponent<SpriteRenderer>().enabled) {
             knifeTimer = knifeInterval - (playerStats.speed / 300);
             if (knifeTimer < .2f)
             {
@@ -78,11 +76,10 @@ public class PlayerController : MonoBehaviour {
             //fire the knife animation!
             anime.Play("armsSlice");
             RaycastHit lineOfFire = new RaycastHit();
-            if (Physics.Raycast(transform.parent.position, transform.parent.forward, out lineOfFire, 1.5f))
-            {
+            if (Physics.Raycast(transform.position, transform.forward, out lineOfFire, 1.5f)) {
                 if (lineOfFire.collider.gameObject.tag == "enemyy")
                 {
-                    lineOfFire.collider.gameObject.GetComponent<mobScript>().damage(playerStats.attack * 10);
+                    lineOfFire.collider.gameObject.GetComponent<mobScript>().TakeDamage(playerStats.attack * 10);
                 }
                 if (lineOfFire.collider.gameObject.tag == "door")
                 {

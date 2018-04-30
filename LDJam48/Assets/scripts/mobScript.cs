@@ -4,12 +4,10 @@ using UnityEngine;
 
 public class mobScript : MonoBehaviour {
 
-    private GameObject player;
+    private PlayerController player;
     private Animator anime;
     private string birthString;
-    private mobManager.mobType type;
-    private static List<mobManager.mobType> mobTypes;
-    public Ingredient currentIngredient;
+    private enemy type;
     private Rigidbody rb;
     private bool dying;
 
@@ -17,43 +15,38 @@ public class mobScript : MonoBehaviour {
 
     public bool active;
     public GameObject dropFab;
+    bool canDamage;
 
-    public bool canDamage;
-    // Use this for initialization
-
-    public void birth(mobManager.mobType mob) {
-        active = true;
-        dying = false;
-        anime = GetComponent<Animator>();
-        rb = GetComponent<Rigidbody>();
-        player = GameObject.FindGameObjectWithTag("Player");
-        if (mobTypes == null) {
-            mobTypes = FindObjectOfType<mobManager>().types;
-        }
-        if (mobTypes == null) {
+    public void Spawn(enemy mob) {
+        if (mob == null) {
             Debug.LogError("ERROR: attempted to spawn a mob before the types dictionary has been established!");
             GameObject.Destroy(this.gameObject.GetComponent<SpriteRenderer>());
             GameObject.Destroy(this.gameObject.GetComponent<BoxCollider>());
         }
 
+        active = true;
+        dying = false;
+        anime = GetComponent<Animator>();
+        rb = GetComponent<Rigidbody>();
+        player = FindObjectOfType<PlayerController>();
         this.type = mob;
-        anime.runtimeAnimatorController = mob.anim;
 
-        rb.constraints = RigidbodyConstraints.FreezePositionY | RigidbodyConstraints.FreezeRotation; //if we get nullpointers here, it is because the names are wrong
-        health = type.maxHealth;
-        PlayerController.toggle += activate;
-        Invoke("setBoxCollider", 0.1f);
+        rb.constraints = RigidbodyConstraints.FreezePositionY | RigidbodyConstraints.FreezeRotation;
+        PlayerController.toggle += Activate;
+        anime.runtimeAnimatorController = type.anim;
+        health = type.health;
+        Invoke("SetBoxCollider", 0.1f);
     }
 
-    void setBoxCollider() {
+    void SetBoxCollider() {
         gameObject.AddComponent(typeof(BoxCollider));
     }
 
-    public void activate(bool b) {
+    public void Activate(bool b) {
         active = b;
     }
 
-    public void damage(float amount) {
+    public void TakeDamage(float amount) {
         health -= amount;
         transform.position = Vector3.MoveTowards(transform.position, transform.position - (transform.forward * 10), 1f * Time.deltaTime * amount / 10);
         if(health < 0) {
@@ -63,44 +56,40 @@ public class mobScript : MonoBehaviour {
             anime.Play("BreadBoideath");
         } else {
             anime.Play("BreadBoiDamage");
-            StartCoroutine("stagger");
+            StartCoroutine("Stagger");
         }
     }
 
-    IEnumerator stagger() {
+    IEnumerator Stagger() {
         active = false;
         yield return new WaitForSeconds(0.25f);
         active = true;
     }
 
-    private void triggerDeath() {
+    private void TriggerDeath() {
         Destroy(this.gameObject);
-
     }
 
-    public void spawnDrops() {
+    public void SpawnDrops() {
         for (int i = 0; i < 3; i++) {
             GameObject o = GameObject.Instantiate(dropFab, transform.position + Vector3.up * 0.5f, transform.rotation);
-            o.GetComponent<dropBehavior>().type = this.type.name;
+            o.GetComponent<dropBehavior>().type = this.type.ingredientDrop;
             o.transform.position = transform.position;
-            o.GetComponent<SpriteRenderer>().sprite = IngredientsList.getIngredient(type.name).ingredintImage;
+            o.GetComponent<SpriteRenderer>().sprite = IngredientsList.getIngredient(type.ingredientDrop).ingredintImage;
             spawnScript.enemyCount--;
-            PlayerController.toggle -= activate;
+            PlayerController.toggle -= Activate;
         }
     }
 
-	// Update is called once per frame
-	void Update () {
-        rb.velocity = Vector3.zero;
+    void ToggleCanDamage() {
+       canDamage = true;
+    }
 
-        if (player == null) {
-            player = GameObject.FindGameObjectWithTag("Player");
-        }
+    void Update () {
 
         if (!active) {
             return;
         }
-
         if (type.logic == mobManager.logicType.BRUTE && Vector3.Distance(player.transform.position, transform.position) < type.visionRange && !dying) {
             Vector3 targetTransform = player.transform.position;
             targetTransform.y = this.transform.position.y;
@@ -112,15 +101,11 @@ public class mobScript : MonoBehaviour {
                 if (canDamage) {
                     canDamage = false;
                     FindObjectOfType<PlayerController>().takeDamage(20);
-                    Invoke("toggleCanDamage", 10);
+                    Invoke("ToggleCanDamage", 10);
                 }
             }
         }
-        transform.position.Set(transform.position.x, type.lockedYPos, transform.position.z);
-        
-    }
 
-    void toggleCanDamage() {
-        canDamage = true;
+        transform.position.Set(transform.position.x, type.lockedYPos, transform.position.z);       
     }
 }

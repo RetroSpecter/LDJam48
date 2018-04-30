@@ -7,7 +7,7 @@ public class MovementController : MonoBehaviour {
     // public List<keyBinding> keyBindings;
     public float sensitivity;
     private Rigidbody rb;
-
+    private Animator anim;
 
     public bool active;
 
@@ -17,6 +17,7 @@ public class MovementController : MonoBehaviour {
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
         rb = GetComponent<Rigidbody>();
+        anim = GetComponentInChildren<Animator>();
         rb.constraints = RigidbodyConstraints.FreezePositionY | RigidbodyConstraints.FreezeRotation;
         PlayerController.toggle += Activate;
 	}
@@ -24,17 +25,24 @@ public class MovementController : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
         rb.velocity = Vector3.zero;
-        if (active) {
+        if (active)
+        {
             Movement();
+        } else {
+            anim.SetFloat("velocity", 0);
         }
     }
 
     void Movement() {
+
         float speed = GetComponent<PlayerController>().playerStats.speed / 3;
         speed = Mathf.Clamp(speed, 2, 10);
 
-        transform.position += transform.right * Input.GetAxis("Horizontal") * Time.deltaTime * speed;
-        transform.position += transform.forward * Input.GetAxis("Vertical") * Time.deltaTime * speed;
+        Vector2 input = Vector3.Normalize(new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical")));
+
+        transform.position += transform.right * input .x* Time.deltaTime * speed;
+        transform.position += transform.forward * input.y * Time.deltaTime * speed;
+        anim.SetFloat("velocity", input.magnitude);
 
         float newRotY = transform.localEulerAngles.y + Input.GetAxis("Mouse X") * sensitivity;
         transform.localEulerAngles = new Vector3(0f, newRotY, 0f);
